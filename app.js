@@ -19,8 +19,8 @@ var commentRoutes = require("./routes/commentRoutes"),
   authenticationRoutes = require("./routes/authenticationRoutes")
 
 //MongoDB Setup
-// mongoose.connect('mongodb://localhost:27017/campbnb', { useNewUrlParser: true, useUnifiedTopology: true });
-mongoose.connect('mongodb+srv://RahulK:Rahul@20@campbnbcluster.jt8qg.mongodb.net/campbnbcloud?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(process.env.DATABASEURL, { useNewUrlParser: true, useUnifiedTopology: true });
+
 //BodyParser Setup
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -36,9 +36,6 @@ app.use(flash());
 
 //Seed Data
 //seedDB();
-
-//test environment variables
-console.log(process.env.PORT, process.env.IP);
 
 // PASSPORT CONFIGURATION
 app.use(expressSession({
@@ -71,6 +68,6 @@ app.use("/campgrounds", campgroundRoutes);
 app.use("/campgrounds/:id/comments", commentRoutes);
 
 //Listen to Requests
-app.listen(process.env.PORT, process.env.IP, function () {
+app.listen(process.env.PORT || 3000, process.env.IP, function () {
   console.log("The CampBnB Server Has Started!");
 });
