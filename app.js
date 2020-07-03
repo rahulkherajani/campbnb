@@ -71,6 +71,6 @@ app.use("/campgrounds", campgroundRoutes);
 app.use("/campgrounds/:id/comments", commentRoutes);
 
 //Listen to Requests
-app.listen(3000, function () {
+app.listen(process.env.PORT, process.env.IP, function () {
   console.log("The CampBnB Server Has Started!");
 });
